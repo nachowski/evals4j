@@ -2,39 +2,37 @@ package io.github.nachowski;
 
 import io.github.nachowski.evals.Completion;
 import io.github.nachowski.providers.Model;
+import static io.github.nachowski.providers.Providers.ANTHROPIC;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
-    extends TestCase
-{
-    /**
-     * Create the test case
-     *
-     * @param testName name of the test case
-     */
-    public AppTest( String testName )
-    {
+public class AppTest extends TestCase {
+
+    public AppTest( String testName ) {
         super( testName );
     }
 
-    /**
-     * @return the suite of tests being tested
-     */
-    public static Test suite()
-    {
+    public static Test suite() {
         return new TestSuite( AppTest.class );
     }
 
-    /**
-     * Rigourous Test :-)
-     */
-    public void testApp() {
+    public void testBasicCompletionWithOpenAi() {
         Completion completion = new Completion(Model.defaultModel());
+
+        String response = completion.getCompletion(
+            null,
+            "Write a one-sentence bedtime story about a unicorn."
+        );
+
+        System.out.println(response);
+        assertNotNull(response);
+    }
+
+    public void testBasicCompletionWithAnthropic() {
+        
+
+        Completion completion = new Completion(Model.of(ANTHROPIC, "claude-3-haiku-20240307"));
 
         String response = completion.getCompletion(
             null,

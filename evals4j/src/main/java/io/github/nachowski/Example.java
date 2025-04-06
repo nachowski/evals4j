@@ -6,22 +6,28 @@ import io.github.nachowski.evals.EvaluationSuite;
 import io.github.nachowski.evals.Evaluator;
 import io.github.nachowski.evals.TestCase;
 import io.github.nachowski.providers.Model;
+import static io.github.nachowski.providers.Providers.ANTHROPIC;
 import static io.github.nachowski.providers.Providers.OPENAI;
 import io.github.nachowski.results.Result;
 
+/**
+ * This is an example of how to use evals4j
+ */
+public class Example {
+    
+    // You'd probably want to use a testcase instead of a main method
+    // in a real-world scenario, but this is just an example.
+    public static void main( String[] args ) {
 
-public class App {
-    public static void main( String[] args ) { // This will move to the /examples folder later
+        // This is a model under test for this eval.
+        Model model = Model.of(ANTHROPIC, "claude-3-5-haiku");
 
-        // This is a model under test for this eval
-        Model model = Model.defaultModel();
+        // This is the prompt under test for this eval.
+        final String prompt = "Please answer the following question:\n";
 
-        // This is the prompt that will be used for the test cases
-        final String prompt = "You are a helpful assistant. Answer the question precisely.\n";
 
-        // The evaluator model differs from the tested model
         Evaluator evaluator = new Evaluator.Builder()
-            .model(Model.of(OPENAI, "gpt-4.5"))
+            .model(Model.of(OPENAI, "gpt-4o")) // The evaluator model differs from the tested model
             .instructions("Check if the response matches the expected output.")
             .build();
 
