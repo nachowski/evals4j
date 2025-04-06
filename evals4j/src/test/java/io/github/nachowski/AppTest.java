@@ -1,5 +1,7 @@
 package io.github.nachowski;
 
+import io.github.nachowski.evals.Completion;
+import io.github.nachowski.providers.Model;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -31,8 +33,15 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testApp()
-    {
-        assertTrue( true );
+    public void testApp() {
+        Completion completion = new Completion(Model.defaultModel());
+
+        String response = completion.getCompletion(
+            null,
+            "Write a one-sentence bedtime story about a unicorn."
+        );
+
+        System.out.println(response);
+        assertNotNull(response);
     }
 }
