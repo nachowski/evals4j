@@ -14,4 +14,12 @@ public class Model {
         return new Model(provider, modelName);
     }
 
+    /**
+     * Default model
+     * @return OpenAI gpt-4o
+     */
+    public static Model defaultModel() {
+        return new Model(Providers.OPENAI, "gpt-4o");
+    }
+
 }

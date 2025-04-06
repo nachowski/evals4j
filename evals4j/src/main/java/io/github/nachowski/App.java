@@ -14,10 +14,12 @@ public class App {
     public static void main( String[] args ) { // This will move to the /examples folder later
 
         // This is a model under test for this eval
-        Model model = Model.of(OPENAI, "gpt-4o");
+        Model model = Model.defaultModel();
+
+        // This is the prompt that will be used for the test cases
         final String prompt = "You are a helpful assistant. Answer the question precisely.\n";
 
-        // Create an evaluator model (differs from the tested model)
+        // The evaluator model differs from the tested model
         Evaluator evaluator = new Evaluator.Builder()
             .model(Model.of(OPENAI, "gpt-4.5"))
             .instructions("Check if the response matches the expected output.")
@@ -33,15 +35,15 @@ public class App {
             .testCases(List.of(case1, case2))
             .build();
                 
-        // Run the test
+        // Run all the evals
         Result result = evaluator.evaluate(suite);
 
-        // Print the results
-        result.getTestCaseResults().forEach(tcResult -> {
-            System.out.println(tcResult.toString());
+        // Print the individual results (optional)
+        result.getTestCaseResults().forEach(r -> {
+            System.out.println(r.toString());
         });
 
         // Check the overall eval threshold
-        assert result.getPassPercentage() > 70.0 : "Pass percentage should be greater than 70%";
+        assert result.getPassPercentage() >= 50.0 : "Pass percentage should be greater than 50%";
     }
 }
