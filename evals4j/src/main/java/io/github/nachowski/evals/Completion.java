@@ -105,7 +105,7 @@ public class Completion {
         Request request = model.provider.getRequest().post(body).build();
 
         // TODO DEBUGGING!
-        // logRequestDetails(request);
+        // Debug.logRequestDetails(request);
 
         try {
             // Execute the request
