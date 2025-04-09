@@ -5,25 +5,23 @@ import java.util.List;
 import io.github.nachowski.providers.Model;
 
 public class EvaluationSuite {
-    private final Model model;
-    private final List<TestCase> testCases;
+    public final Model model;
+    public final List<TestCase> testCases;
+    public final String prompt;
+    public final EvalStrategy strategy;
 
-    private EvaluationSuite(Model model, List<TestCase> testCases) {
+    private EvaluationSuite(Model model, List<TestCase> testCases, String prompt, EvalStrategy strategy) {
         this.model = model;
         this.testCases = testCases;
-    }
-
-    public Model getModel() {
-        return model;
-    }
-
-    public List<TestCase> getTestCases() {
-        return testCases;
+        this.prompt = prompt;
+        this.strategy = strategy;
     }
 
     public static class Builder {
         private Model model;
         private List<TestCase> testCases;
+        private String prompt;
+        private EvalStrategy strategy;
 
         public Builder model(Model model) {
             this.model = model;
@@ -36,12 +34,17 @@ public class EvaluationSuite {
         }
 
         public EvaluationSuite build() {
-            return new EvaluationSuite(model, testCases);
+            return new EvaluationSuite(model, testCases, prompt, (strategy == null ? new CotClassifyStrategy() : strategy));
         }
 
         public Builder prompt(String prompt) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'prompt'");
+            this.prompt = prompt;
+            return this;
+        }
+
+        public Builder strategy(EvalStrategy strategy) {
+            this.strategy = strategy;
+            return this;
         }
     }
 }

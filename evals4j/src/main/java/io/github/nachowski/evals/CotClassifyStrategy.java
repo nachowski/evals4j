@@ -37,5 +37,4 @@ public class CotClassifyStrategy implements EvalStrategy {
         String content = completion.substring(contentStart, endIndex).trim();
         return content.equalsIgnoreCase("correct");
     }
-
 }

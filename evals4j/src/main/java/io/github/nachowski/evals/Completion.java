@@ -59,8 +59,8 @@ public class Completion {
 
 
     public enum MAX_TOKENS {
-        SHORT(128),
-        DEFAULT(1024),
+        SHORT(1024),
+        DEFAULT(2048),
         LONG(4096);
 
         private final int value;
