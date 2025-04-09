@@ -50,12 +50,12 @@ public class Example {
         Result result = evaluator.evaluate(suite);
 
         // Print the individual results (optional)
-        result.getTestCaseResults().forEach(r -> {
+        result.testCaseResults.forEach(r -> {
             System.out.println(r.toString());
         });
 
         // Check the overall eval threshold - use assertations in real code
-        if (result.getPassPercentage() < 50.0) {
+        if (result.passPercentage < 90) {
             System.out.println("The model failed the evaluation.");
         } else {
             System.out.println("The model passed the evaluation.");
